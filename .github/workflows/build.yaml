@@ -21,7 +21,7 @@ jobs:
       - name: Get the short version of the last commit
         id: vars
         run: |
-          echo "tag_name=$(date +%Y.%m.%d.%H.%M).$(sha256sum dist/kindos.tar.gz | cut -c1-8)" >> $GITHUB_OUTPUT
+          echo "tag_name=$(sha256sum dist/kindos.tar.gz | cut -c1-8)" >> $GITHUB_OUTPUT
 
       - name: Create the GH release
         uses: softprops/action-gh-release@v1
