@@ -23,6 +23,6 @@ docker rm kindos
 docker rmi kindos-alpinelinux
 
 echo "Compressing the image..."
-gzip -9 kindos-alpinelinux.tar
+gzip -9 kal.tar
 du -sh kindos-alpinelinux.tar.gz
 
