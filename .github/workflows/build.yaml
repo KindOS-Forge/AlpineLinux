@@ -16,7 +16,7 @@ jobs:
           python-version: '3.11' 
 
       - name: Create the rootfs
-        run: ./build.py
+        run: python -m kindos.build
 
       - name: Get the short version of the last commit
         id: vars

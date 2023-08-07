@@ -12,5 +12,5 @@ license = {text = "MIT"}
 
 
 [tool.pdm.scripts]
-build = "python build.py"
+build = "python -m kindos.build"
 
