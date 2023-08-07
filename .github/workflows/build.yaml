@@ -10,11 +10,13 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11' 
 
       - name: Create the rootfs
-        run: ./build.sh
+        run: ./build.py
 
       - name: Get the short version of the last commit
         id: vars
