@@ -15,13 +15,14 @@ echo "Importing the image into docker..."
 docker import - kindos-alpinelinux < alpine-minirootfs-${ALPINE_VERSION}${ALPINE_FIX}-x86_64.tar.gz
 docker run -v ${SCRIPT_DIR}/kindos:/kindos \
     --name kindos \
-    -it kindos-alpinelinux \
+    kindos-alpinelinux \
     sh -c "apk add python3 && python -m kindos"
 
 docker export kindos > kindos-alpinelinux.tar
 docker rm kindos
 docker rmi kindos-alpinelinux
 
+echo "Compressing the image..."
 xz kindos-alpinelinux.tar
 du -sh kindos-alpinelinux.tar.xz
 
