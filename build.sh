@@ -16,13 +16,13 @@ docker import - kindos-alpinelinux < alpine-minirootfs-${ALPINE_VERSION}${ALPINE
 docker run -v ${SCRIPT_DIR}/kindos:/kindos \
     --name kindos \
     kindos-alpinelinux \
-    sh -c "apk add python3 && python -m kindos"
+    sh -c "apk add --no-cache python3 && python -m kindos"
 
 docker export kindos > kindos-alpinelinux.tar
 docker rm kindos
 docker rmi kindos-alpinelinux
 
 echo "Compressing the image..."
-xz kindos-alpinelinux.tar
-du -sh kindos-alpinelinux.tar.xz
+gzip -9 kindos-alpinelinux.tar
+du -sh kindos-alpinelinux.tar.gz
 

@@ -24,6 +24,6 @@ jobs:
       - name: Create the GH release
         uses: softprops/action-gh-release@v1
         with:
-          files: /tmp/build/kindos-alpinelinux.tar.xz
+          files: /tmp/build/kindos-alpinelinux.tar.*
           tag_name: ${{ steps.vars.outputs.tag_name }}
 
