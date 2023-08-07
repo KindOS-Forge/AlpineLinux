@@ -1,14 +1,10 @@
 #!/bin/sh
 set -eu
 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
 ALPINE_VERSION=3.18
 ALPINE_FIX=.2
-
-# # Check if the script is run as root.
-# if [ "$(id -u)" -ne 0 ]; then
-#     echo "Please run as root"
-#     exit 1
-# fi
 
 rm -rf /tmp/build && mkdir -p /tmp/build && cd /tmp/build
 
@@ -17,6 +13,13 @@ curl -O https://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/releases/x86_64
 # Import the image into docker
 echo "Importing the image into docker..."
 docker import - kindos-alpinelinux < alpine-minirootfs-${ALPINE_VERSION}${ALPINE_FIX}-x86_64.tar.gz
-docker run -v provision:/provision \
-    -it kindos-alpinelinux sh
+docker rm kindos || true
+docker run -v ${SCRIPT_DIR}/kindos:/kindos \
+    --name kindos \
+    -it kindos-alpinelinux \
+    sh -c "apk add python3 && python -m kindos"
+
+docker export kindos > kindos-alpinelinux.tar
+xz kindos-alpinelinux.tar
+du -sh kindos-alpinelinux.tar.xz
 
