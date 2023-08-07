@@ -19,7 +19,7 @@ jobs:
       - name: Get the short version of the last commit
         id: vars
         run: |
-          echo "tag_name=$(cat artifacts/debian_12_slim.tar.gz.sha256|cut -c 1-8)" >> $GITHUB_OUTPUT
+          echo "tag_name=(date +%Y.%m.%d)$(sha256sum /tmp/build/kindos-alpinelinux.tar.xz|cut -c 1-8)" >> $GITHUB_OUTPUT
 
       - name: Create the GH release
         uses: softprops/action-gh-release@v1
