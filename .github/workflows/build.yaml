@@ -19,11 +19,11 @@ jobs:
       - name: Get the short version of the last commit
         id: vars
         run: |
-          echo "tag_name=test" >> $GITHUB_OUTPUT
+          echo "tag_name=$(date +%Y.%m.%d.%H.%M)" >> $GITHUB_OUTPUT
 
       - name: Create the GH release
         uses: softprops/action-gh-release@v1
         with:
-          files: /tmp/build/kindos-alpinelinux.tar.*
+          files: /tmp/build/kindos.tar.*
           tag_name: ${{ steps.vars.outputs.tag_name }}
 

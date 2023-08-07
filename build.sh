@@ -12,17 +12,17 @@ curl -O https://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/releases/x86_64
 
 # Import the image into docker
 echo "Importing the image into docker..."
-docker import - kindos-alpinelinux < alpine-minirootfs-${ALPINE_VERSION}${ALPINE_FIX}-x86_64.tar.gz
+docker import - kindos < alpine-minirootfs-${ALPINE_VERSION}${ALPINE_FIX}-x86_64.tar.gz
 docker run -v ${SCRIPT_DIR}/kindos:/kindos \
     --name kindos \
-    kindos-alpinelinux \
+    kindos \
     sh -c "apk add --no-cache python3 && python -m kindos"
 
-docker export kindos > kindos-alpinelinux.tar
+docker export kindos > kindos.tar
 docker rm kindos
-docker rmi kindos-alpinelinux
+docker rmi kindos
 
 echo "Compressing the image..."
-gzip -9 kal.tar
-du -sh kindos-alpinelinux.tar.gz
+gzip -9 kindos.tar
+du -sh kindos.tar.gz
 
