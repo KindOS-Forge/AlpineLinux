@@ -5,7 +5,7 @@ jobs:
    
 
   rebuild:
-    name: Rebuild the rootfs.tar.gz
+    name: Rebuild kindos.tar.gz
     runs-on: ubuntu-latest
     permissions:
       contents: write

@@ -5,12 +5,18 @@ description = "The Developers Friendly Open Source Workspace"
 authors = [
     {name = "João Pinto", email = "lamego.pinto@gmail.com"},
 ]
-dependencies = []
+dependencies = [
+    "black>=23.7.0",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "MIT"}
 
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [tool.pdm.scripts]
 build = "python -m kindos.build"
+shell = "python -m kindos.shell"
 
