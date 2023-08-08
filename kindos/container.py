@@ -50,7 +50,6 @@ class Container:
         cmd = f"docker run --name {name} " + " ".join(
             [f"-v {mount}" for mount in bind_mounts] + [self.image_name, cmd]
         )
-        cmd += " > /dev/null"
         cmd += self.image_name
         execute_command(cmd)
 
