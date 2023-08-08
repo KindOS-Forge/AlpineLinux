@@ -1,10 +1,11 @@
-import urllib.request
-from dataclasses import dataclass
-from tempfile import NamedTemporaryFile
-from . import execute_command
-from pathlib import Path
-import uuid
 import re
+import urllib.request
+import uuid
+from dataclasses import dataclass
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+
+from . import execute_command
 
 
 @dataclass
@@ -13,8 +14,8 @@ class Container:
 
     def __enter__(self):
         return self
-    
-    def __exit__(self, exc_type, exc_value, traceback):        
+
+    def __exit__(self, exc_type, exc_value, traceback):
         self.rm()
 
     def download_image(self, url: str) -> str:
@@ -30,14 +31,14 @@ class Container:
         """if image is an url download it to a temporary location and return the path"""
         image_name = self.image_name
         if image_name.startswith("http"):
-            if not ".tar" in self.image_name:
+            if ".tar" not in self.image_name:
                 raise Exception("Image must be a tar file")
             image_name = self.download_image(self.image_name)
         if ".tar" in image_name:
             image_name = self.import_image(self.image_name)
             self.image_name = image_name
 
-    def run(self, cmd: str ="", name: str ="", bind_mounts: list = []):
+    def run(self, cmd: str = "", name: str = "", bind_mounts: list = []):
         """Run a command inside a container"""
 
         # generate a name if not provided using uuid
@@ -45,7 +46,7 @@ class Container:
             generated_uuid = uuid.uuid4()
             name = str(generated_uuid)[:8]
             self.container_name = name
-        
+
         self.check_image()
         cmd = f"docker run --name {name} " + " ".join(
             [f"-v {mount}" for mount in bind_mounts] + [self.image_name, cmd]
@@ -59,9 +60,9 @@ class Container:
         tag_name = re.sub(r"\.tar\.gz$", "", filename)
         execute_command(f"docker import {image_name} {tag_name}")
         return tag_name
-    
+
     def rm(self):
-        """ Remove the running container """
+        """Remove the running container"""
         execute_command(f"docker rm {self.container_name} > /dev/null")
 
     def export(self, output_file: str):

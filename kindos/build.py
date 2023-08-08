@@ -1,11 +1,12 @@
 #!/bin/python3
 import os
+
+from .colors import INFO, OK, R
 from .container import Container
 from .size import human_readable_size
-from .colors import OK, INFO, R
 
 ALPINE_VERSION = "3.18"
-ALPINE_FIX = ".2"
+ALPINE_FIX = ".3"
 ALPINE_ARCH = "x86_64"
 ALPINE_MIRROR = "http://dl-cdn.alpinelinux.org/alpine"
 

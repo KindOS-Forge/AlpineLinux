@@ -11,8 +11,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set up PDM
         uses: pdm-project/setup-pdm@v2
-        with:
-          python-version: 3.11
 
       - name: Install dependencies
         run: |
@@ -21,9 +19,11 @@ jobs:
       - name: Build before sending to release
         run: |
           pdm run build
-  
+          pdm run update-changelog > ${{ github.workspace }}-CHANGELOG.txt
+
       - name: Create the GH release
-        if: startsWith(github.ref, 'refs/tags/') 
+        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
           files: dist/*
+          body_path: ${{ github.workspace }}-CHANGELOG.txt

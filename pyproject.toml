@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "black>=23.7.0",
     "pre-commit>=3.3.3",
+    "jinja2>=3.1.2",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
@@ -19,6 +20,6 @@ build-backend = "pdm.backend"
 
 [tool.pdm.scripts]
 black = "black ."
+update-changelog = "python -m kindos.update_changelog"
 build = "python -m kindos.build"
 shell = "python -m kindos.shell"
-

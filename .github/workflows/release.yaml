@@ -11,8 +11,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set up PDM
         uses: pdm-project/setup-pdm@v2
-        with:
-          python-version: 3.11
 
       - name: Install dependencies
         run: |
@@ -20,7 +18,7 @@ jobs:
 
       - name: Build before sending to release
         run: |
-          pdm build      
+          pdm build
 
       - name: Publish distribution 📦 to PyPI
         if: startsWith(github.ref, 'refs/tags')
