@@ -12,12 +12,12 @@ jobs:
       - name: Set up PDM
         uses: pdm-project/setup-pdm@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.11
 
       - name: Install dependencies
         run: |
           pdm sync
-          
+
       - name: Publish distribution 📦 to PyPI
         if: startsWith(github.ref, 'refs/tags')
         uses: pypa/gh-action-pypi-publish@release/v1
