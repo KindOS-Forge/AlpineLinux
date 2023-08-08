@@ -1,5 +1,5 @@
 def human_readable_size(size: int) -> str:
-    """ Returns human readable size """
+    """Returns human readable size"""
     if size < 1024:
         return f"{size}B"
     size /= 1024
