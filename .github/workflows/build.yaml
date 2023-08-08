@@ -1,4 +1,4 @@
-name: Publish GitHub release
+name: Build kindos.tar.gz
 on: [push]
 
 jobs:
