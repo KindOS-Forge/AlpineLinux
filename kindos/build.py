@@ -15,7 +15,7 @@ alpine-minirootfs-{ALPINE_VERSION}{ALPINE_FIX}-{ALPINE_ARCH}.tar.gz"
 
 with Container(download_url) as container:
     container.run(
-        "apk update ",  # && apk add python3 && /kindos-deploy/deploy.py",
+        "sh -c 'apk update && apk add python3 && /kindos-deploy/deploy.py'",
         bind_mounts=[f"{os.getcwd()}/kindos-deploy:/kindos-deploy:ro"],
     )
     container.export("dist/kindos.tar.gz")
